@@ -1,6 +1,7 @@
 import React from "react";
 
-const Card = () => {
+const Card = (props) => {
+  const { id, name, age } = props;
   return (
     //dib?
     //br3 border 3
@@ -8,11 +9,12 @@ const Card = () => {
     //ma2 margin 2
     //grow animation
     //bw2 ?
-    <div className="bg-light-green dib br3 pa3 ma2 grow shadow-5 bw2">
-      <img alt="robo-card" src="https://robohash.org/johndoe?size=200x200" />
+    //tc text centered
+    <div className="bg-light-green dib br3 pa3 ma2 grow shadow-5 bw2 tc">
+      <img alt="robo-card" src={`https://robohash.org/${id}?size=200x200`} />
       <div>
-        <h2>Jane Doe</h2>
-        <p>Jane Doe is a cantankerous robot</p>
+        <h2>{name}</h2>
+        <p>Age: {age} years</p>
       </div>
     </div>
   );
