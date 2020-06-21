@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-// import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import Hello from "./Hello";
 import "tachyons";
+import Card from "./Card";
 
 ReactDOM.render(
-  <Hello VietnameseGreeting={"Xin Chào, Reacter"} />,
+  <div>
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+  </div>,
   document.getElementById("root")
 );
 
