@@ -1,7 +1,7 @@
 import React from "react";
 
 const Card = (props) => {
-  const { id, name, age } = props;
+  const { id, name, email } = props;
   return (
     //dib?
     //br3 border 3
@@ -14,7 +14,7 @@ const Card = (props) => {
       <img alt="robo-card" src={`https://robohash.org/${id}?size=200x200`} />
       <div>
         <h2>{name}</h2>
-        <p>Age: {age} years</p>
+        <p>Email: {email}</p>
       </div>
     </div>
   );
