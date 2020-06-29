@@ -1,8 +1,8 @@
 import React from "react";
 import CardList from "./CardList";
 import SearchBox from "./SearchBox";
-import { robots } from "./robots";
 import users from "./users.json";
+import Scroll from "./Scroll";
 import "./App.css";
 
 class App extends React.Component {
@@ -40,18 +40,23 @@ class App extends React.Component {
         .toLowerCase()
         .includes(this.state.searchField.toLowerCase());
     });
-
-    return (
-      <div className="tc">
-        <link
-          href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-          rel="stylesheet"
-        ></link>
-        <h1>RoboFriends</h1>
-        <SearchBox searchChange={this.onSearchChange} />
-        <CardList robots={filteredRobots} />
-      </div>
-    );
+    if (this.state.robots.length === 0) {
+      return <h1 className="tc">Loading...</h1>;
+    } else {
+      return (
+        <div className="tc">
+          <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+          ></link>
+          <h1>RoboFriends</h1>
+          <SearchBox searchChange={this.onSearchChange} />
+          <Scroll>
+            <CardList robots={filteredRobots} />
+          </Scroll>
+        </div>
+      );
+    }
   }
 }
 
