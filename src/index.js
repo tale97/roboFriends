@@ -1,14 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import "tachyons";
 import App from "./containers/App";
 import { searchRobots } from "./reducers.js";
+import logger from "redux-logger";
 
-const store = createStore(searchRobots);
+const logger1 = (store) => (next) => (action) => {
+  console.log("dispatching action", action);
+  let result = next(action);
+  console.log("next state", store.getState());
+  return result;
+};
+
+const store = createStore(searchRobots, applyMiddleware(logger));
 
 ReactDOM.render(
   <Provider store={store}>
