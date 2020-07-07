@@ -12,7 +12,7 @@ const store = createStore(searchRobots);
 
 ReactDOM.render(
   <div>
-    <App />
+    <App store={store} />
   </div>,
   document.getElementById("root")
 );
