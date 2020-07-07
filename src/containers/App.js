@@ -4,12 +4,17 @@ import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
 import "./App.css";
 import { connect } from "react-redux";
-import { setSearchField } from "../actions.js";
+import { setSearchField, requestRobots } from "../actions.js";
 
 // mapStateToProps tell the component which state to listen to, in this case, listen to "searchField2"
 const mapStateToProps = (state) => {
+  console.log(state);
+
   return {
-    searchField2: state.searchField2,
+    searchField2: state.searchRobots.searchField2,
+    robots2: state.receiveRobots.robots2,
+    isPending: state.receiveRobots.isPending,
+    error: state.receiveRobots.error,
   };
 };
 
@@ -17,17 +22,19 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchChange2: (event) => dispatch(setSearchField(event.target.value)),
+    onRequestRobots: () => requestRobots(dispatch),
+    // onRequestRobots: () => dispatch(requestRobots()),
   };
 };
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      robots: [],
-      searchField: "",
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     robots: [],
+  //     searchField: "",
+  //   };
+  // }
 
   // when search change, change the this.robots
 
@@ -39,20 +46,20 @@ class App extends React.Component {
   // };
 
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((data) => this.setState({ robots: data }));
+    // fetch("https://jsonplaceholder.typicode.com/users")
+    //   .then((response) => response.json())
+    //   .then((data) => this.setState({ robots: data }));
+    this.props.onRequestRobots();
   }
 
   componentWillUnmount() {}
 
   render() {
-    const filteredRobots = this.state.robots.filter((robot) => {
-      return robot.name
-        .toLowerCase()
-        .includes(this.props.searchField2.toLowerCase());
+    const { searchField2, robots2, isPending } = this.props;
+    const filteredRobots = robots2.filter((robot) => {
+      return robot.name.toLowerCase().includes(searchField2.toLowerCase());
     });
-    if (this.state.robots.length === 0) {
+    if (isPending) {
       return <h1 className="tc">Loading...</h1>;
     } else {
       return (

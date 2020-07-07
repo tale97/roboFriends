@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import "tachyons";
 import App from "./containers/App";
-import { searchRobots } from "./reducers.js";
+import { searchRobots, receiveRobots } from "./reducers.js";
 import logger from "redux-logger";
+import thunkMiddleware from "redux-thunk";
 
 const logger1 = (store) => (next) => (action) => {
   console.log("dispatching action", action);
@@ -16,7 +17,12 @@ const logger1 = (store) => (next) => (action) => {
   return result;
 };
 
-const store = createStore(searchRobots, applyMiddleware(logger));
+const rootReducer = combineReducers({ searchRobots, receiveRobots });
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunkMiddleware, logger)
+);
 
 ReactDOM.render(
   <Provider store={store}>
