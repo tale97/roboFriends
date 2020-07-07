@@ -6,17 +6,15 @@ import "./App.css";
 import { connect } from "react-redux";
 import { setSearchField } from "../actions.js";
 
+// mapStateToProps tell the component which state to listen to, in this case, listen to "searchField2"
 const mapStateToProps = (state) => {
-  console.log("state change");
-  console.log(state);
   return {
     searchField2: state.searchField2,
   };
 };
 
-// dispatch send actions to reducer
+// actions are just objects; dispatch will send these actions to reducer, which will return a object desribing the new state
 const mapDispatchToProps = (dispatch) => {
-  console.log("dispatching");
   return {
     onSearchChange2: (event) => dispatch(setSearchField(event.target.value)),
   };
@@ -41,9 +39,6 @@ class App extends React.Component {
   // };
 
   componentDidMount() {
-    console.log(this);
-    console.log("componentDidMount");
-    console.log(this.props.store.getState());
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((data) => this.setState({ robots: data }));
