@@ -5,7 +5,7 @@
 This is a simple page where there are a bunch of cards with robots. There is a search box to search for each robot.  
 This project really doesn't add value to any one's life. It was simply a project that I build from taking Andrei Neagoie's 
 [The Complete Web Developer in 2021: Zero to Mastery](https://www.udemy.com/share/101WcUAkYddltSQXo=/). The reason I built
-this was to get a hang of the basic of using React framework.
+this was to get a hang of the basic of using React framework. However, this is the first web app I made using React so it's extra special to me despite not really being a valuable tool.
 
 ## Demo
 
